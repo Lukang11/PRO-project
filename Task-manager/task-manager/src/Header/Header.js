@@ -2,6 +2,7 @@ import "./HeaderStyle.css"
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Bee from './logo.png'
 
 function Header() {
     return (
@@ -9,12 +10,7 @@ function Header() {
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">
-            <img 
-                src="/logo.png"
-                width="300"
-                height="300"
-                alt="TM"
-            />
+            <img src={Bee} width="100" height="100"></img>
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
