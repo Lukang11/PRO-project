@@ -1,8 +1,11 @@
+import "./HeaderStyle.css"
 
-function Header(){
-    return <div>
-        <h1>Header</h1>
+function Header() {
+    return <div className="header">
+        <ul className="list">
+            <li><a>Dodaj zadanie</a></li>
+            <li><a>Wyloguj</a></li>
+        </ul>
     </div>
 }
-
 export default Header;
