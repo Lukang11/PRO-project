@@ -1,17 +1,16 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function Workcard() {
+function Workcard(props) {
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>Tomek Wilczewski</Card.Title>
+        <Card.Subtitle>12:30-13:45</Card.Subtitle>
         <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          Wymiana opon
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Button variant="primary">Zrobione</Button>
       </Card.Body>
     </Card>
   );
