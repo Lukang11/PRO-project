@@ -1,14 +1,14 @@
 .header{
     background-color:black;
     width: auto;
-    height: 20%;
+    height: 100px;
     color: rgb(197, 197, 201);
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    top: 0;
 }
 .list{
     list-style: none;
 }
 body{
-    height:10000px;
     background-color: rgb(180, 174, 174);
 }
