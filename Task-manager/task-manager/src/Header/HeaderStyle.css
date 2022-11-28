@@ -12,3 +12,6 @@
 body{
     background-color: rgb(180, 174, 174);
 }
+.container{
+    margin: 0;
+}
