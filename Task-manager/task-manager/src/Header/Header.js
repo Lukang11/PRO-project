@@ -10,7 +10,7 @@ function Header() {
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">
-            <img src={Bee} width="100" height="100"></img>
+            <img src={Bee} width="60" height="60" alt="TM"></img>
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
