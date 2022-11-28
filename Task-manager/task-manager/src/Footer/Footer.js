@@ -1,10 +1,12 @@
-import "./FooterStyle.css"
+import './FooterStyle.css';
 
 function Footer() {
-    return <div className="footer">
-        <footer>
-            <p>footer</p>
-        </footer>
+  return (
+    <div className='footer'>
+      <footer>
+        <p>Task Manager &trade;</p>
+      </footer>
     </div>
+  );
 }
 export default Footer;
