@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 
 function Workcard(props) {
   return (
-    <Card style={{ width: '18rem' }}>
+    <div>
       <Card.Body>
         <Card.Title>Tomek Wilczewski</Card.Title>
         <Card.Subtitle>12:30-13:45</Card.Subtitle>
@@ -12,7 +12,7 @@ function Workcard(props) {
         </Card.Text>
         <Button variant="primary">Zrobione</Button>
       </Card.Body>
-    </Card>
+    </div>
   );
 }
 
