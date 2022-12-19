@@ -1,50 +1,56 @@
 import "./Login.css"
+import React, { useState } from 'react';
+import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function Login(){
-    return(
-        <Card>
-        <form className="loginForm">
-        <h3>Sign In</h3>
-        <div className="mb-3">
-          <label>Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Enter email"
-          />
-        </div>
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Enter password"
-          />
-        </div>
-        <div className="mb-3">
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id="customCheck1"
-            />
-            <label className="custom-control-label" htmlFor="customCheck1">
-              Remember me
+
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axios.post('/login', { username, password })
+      .then((response) => {
+        // Jeśli logowanie się powiodło, zapisz token JWT w localStorage
+        localStorage.setItem('token', response.data.token);
+        // Przekieruj użytkownika do głównej strony
+        window.location = '/';
+      })
+      .catch((error) => {
+        setError('Nieprawidłowa nazwa użytkownika lub hasło');
+      });
+  };
+
+  return (
+    <div className='login'>
+      <Card>
+        <Card.Body>
+          <form onSubmit={handleSubmit}>
+            <label>
+              E-mail:
+              <br></br>
+              <input type="email" value={username} onChange={(event) => setUsername(event.target.value)} />
             </label>
-          </div>
-        </div>
-        <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </div>
-        <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
-        </p>
-      </form>
+            <br></br>
+            <label>
+              Password:
+              <br></br>
+              <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+            </label>
+            {error && <p className="error">{error}</p>}
+            <div className="loginButtonContainer">
+              <Button variant="primary" type="submit" className="loginButton">Login</Button>
+            </div>
+          </form>
+        </Card.Body>
       </Card>
-    );
-}
+    </div>
+
+  );
+};
 
 export default Login;
