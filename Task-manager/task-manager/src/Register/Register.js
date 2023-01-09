@@ -62,7 +62,7 @@ function Register() {
                                     onChange={handleChange}
                                 />
                                 {error && <p>{error}</p>}
-                                <div className="regiserButtonContainer">
+                                <div className="registerButtonContainer">
                                     <Button variant="primary" type="submit" className="registerButton">Sign up</Button>
                                 </div>
                             </form>
