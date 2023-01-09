@@ -3,8 +3,12 @@ import './ContentStyle.css';
 import Workcard from "../WorkCard/Workcard";
 
 function Content() {
-    return (
+    return (<>
         <div className="hexagon"><Workcard /></div>
+        <div className="hexagon"><Workcard /></div>
+        <div className="hexagon"><Workcard /></div>
+        <div className="hexagon"><Workcard /></div>
+        </>
     );
 }
 
