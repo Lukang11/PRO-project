@@ -10,17 +10,17 @@ function Header() {
         <>
       <Navbar bg="dark" variant="dark" className="nav">
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="/">
             <img src={Bee} width="60" height="60" alt="TM"></img>
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
             <Nav.Link href="#test">Test</Nav.Link>
           </Nav>
-          <Button className="navButton" variant="secondary" href="#login">Sign in</Button>{' '}
-          <Button className="navButton" variant="secondary" href="#register">Sign up</Button>{' '}
+          <Button className="navButton" variant="secondary" href="/login">Sign in</Button>{' '}
+          <Button className="navButton" variant="secondary" href="/register">Sign up</Button>{' '}
         </Container>
       </Navbar>
         </>
