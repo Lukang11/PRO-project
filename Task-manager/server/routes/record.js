@@ -23,4 +23,29 @@ recordRoutes.route("/record").get(function (req, res) {
     });
 });
 
+recordRoutes.route("/record/add").post(function (req, res) {
+    const record = req.body;
+    db.collection("records").insertOne(record, function(err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+recordRoutes.route("/record/:id").delete(function (req, res) {
+    const id = req.params.id;
+    db.collection("records").deleteOne({ _id: ObjectId(id) }, function(err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+recordRoutes.route("/record/:id").put(function (req, res) {
+    const id = req.params.id;
+    const record = req.body;
+    db.collection("records").updateOne({ _id: ObjectId(id) }, { $set: record }, function(err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
 module.exports = recordRoutes;
