@@ -7,7 +7,6 @@ import './App.css';
 
 import React from 'react';
 import { Pricing } from './Pricing/Pricing';
-import { Features } from './Features/Features';
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
           <Route path='/'></Route>
           <Route index element={<Content />}></Route>
           <Route path='/pricing' element={<Pricing />}></Route>
-          <Route path='/features' element={<Features />}></Route>
           <Route path='login' element={<Login />}></Route>
           <Route path='register' element={<Register />}></Route>
         </Routes>
