@@ -25,7 +25,7 @@ export function Pricing() {
 
       <div className='pricing-card'>
         <h2>Plan premium</h2>
-        <p className='price'>19.99$/miesiąc</p>
+        <p className='price'>29.99$/miesiąc</p>
         <ul>
           <li>Możliwość dodania nieograniczonej liczby użytkowników</li>
           <li>10GB miejsca na bazie danych</li>
