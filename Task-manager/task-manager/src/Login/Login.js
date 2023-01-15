@@ -1,27 +1,30 @@
-import './Login.css';
+import "./Login.css"
 import React, { useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+axios.defaults.headers.common = {
+  'Authorization': `Bearer ${localStorage.getItem('token')}`,
+  'Content-Type': 'application/json'
+};
+
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [login, setlogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios
-      .post('/login', { username, password })
+    axios.post('http://localhost:5001/api/login', { login, password })
       .then((response) => {
-        // Jeśli logowanie się powiodło, zapisz token JWT w localStorage
         localStorage.setItem('token', response.data.token);
-        // Przekieruj użytkownika do głównej strony
         window.location = '/';
       })
       .catch((error) => {
         setError('Nieprawidłowa nazwa użytkownika lub hasło');
+        console.log(error);
       });
   };
 
@@ -31,34 +34,25 @@ const Login = () => {
         <Card.Body>
           <form onSubmit={handleSubmit}>
             <label>
-              E-mail:
+              Username:
               <br></br>
-              <input
-                type='email'
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-              />
+              <input type="text" value={login} onChange={(event) => setlogin(event.target.value)} />
             </label>
             <br></br>
             <label>
-              Hasło:
+              Password:
               <br></br>
-              <input
-                type='password'
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
+              <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
             </label>
-            {error && <p className='error'>{error}</p>}
-            <div className='loginButtonContainer'>
-              <Button variant='primary' type='submit' className='loginButton'>
-                Zaloguj się
-              </Button>
+            {error && <p className="error">{error}</p>}
+            <div className="loginButtonContainer">
+              <Button variant="primary" type="submit" className="loginButton">Login</Button>
             </div>
           </form>
         </Card.Body>
       </Card>
     </div>
+
   );
 };
 
