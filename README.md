@@ -1,9 +1,23 @@
-# PRO-project
-PRO project - Task manager
 
 
-PULLOWAĆ I PUSHOWAĆ TYLKO DO DEVELOPA
+# Task-Manager
+
+Application for plan, organize and prioritize all tasks so that employee can finish them within the limited time frame and in the most efficient manner.  Created as final project for PRO classes on V SEM PJAIT
 
 
-1.Przy tworzeniu componentu uworzyć do niego osobny folder ex. src/{nazwakomponentu}                                                                                      
-2.Plik css który dodaje style do componentu umieścić w folderze związanym z tym komponentem.
+## Tech
+
+- [ReactJS](https://reactjs.org/)
+- [Node.js](https://nodejs.org/en/)
+- [MongoDB](https://www.mongodb.com/)
+- [Bootstrap](https://getbootstrap.com/)
+
+## Features
+
+- Database connection
+- Login/Registration
+- Admin panel
+
+
+
+

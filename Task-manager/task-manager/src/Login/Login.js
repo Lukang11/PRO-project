@@ -1,9 +1,8 @@
-import "./Login.css"
+import './Login.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -13,7 +12,8 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.post('/login', { username, password })
+    axios
+      .post('/login', { username, password })
       .then((response) => {
         // Jeśli logowanie się powiodło, zapisz token JWT w localStorage
         localStorage.setItem('token', response.data.token);
@@ -33,23 +33,32 @@ const Login = () => {
             <label>
               E-mail:
               <br></br>
-              <input type="email" value={username} onChange={(event) => setUsername(event.target.value)} />
+              <input
+                type='email'
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+              />
             </label>
             <br></br>
             <label>
-              Password:
+              Hasło:
               <br></br>
-              <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+              <input
+                type='password'
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
             </label>
-            {error && <p className="error">{error}</p>}
-            <div className="loginButtonContainer">
-              <Button variant="primary" type="submit" className="loginButton">Login</Button>
+            {error && <p className='error'>{error}</p>}
+            <div className='loginButtonContainer'>
+              <Button variant='primary' type='submit' className='loginButton'>
+                Zaloguj się
+              </Button>
             </div>
           </form>
         </Card.Body>
       </Card>
     </div>
-
   );
 };
 

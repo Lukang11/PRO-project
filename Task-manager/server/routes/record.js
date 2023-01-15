@@ -4,6 +4,8 @@ const express = require("express");
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /record.
 const recordRoutes = express.Router();
+const ObjectId = require('mongodb').ObjectId;
+
 
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://admin:admin@task-manager.u7qr6rf.mongodb.net/?retryWrites=true&w=majority";
@@ -18,6 +20,22 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 // This section will help you get a list of all the records.
 recordRoutes.route("/record").get(function (req, res) {
     db.collection("records").find({}).toArray(function(err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+recordRoutes.route("/record/:id").get(function (req, res) {
+    const id = req.params.id;
+    db.collection("records").findOne({ _id: ObjectId(id) }, function(err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+recordRoutes.route("/record/:name").get(function (req, res) {
+    const name = req.params.name;
+    db.collection("records").findOne({ name: name }, function(err, result) {
         if (err) throw err;
         res.send(result);
     });
