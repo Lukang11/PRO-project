@@ -14,15 +14,14 @@ function Header() {
             <img src={Bee} width='60' height='60' alt='TM'></img>
           </Navbar.Brand>
           <Nav className='me-auto'>
-            <Nav.Link href='/'>Home</Nav.Link>
-            <Nav.Link href='/pricing'>Pricing</Nav.Link>
-            <Nav.Link href='#test'>Test</Nav.Link>
+            <Nav.Link href='/'>Strona główna</Nav.Link>
+            <Nav.Link href='/pricing'>Cennik</Nav.Link>
           </Nav>
-          <Button className='navButton' variant='secondary' href='/login'>
-            Sign in
-          </Button>{' '}
           <Button className='navButton' variant='secondary' href='/register'>
-            Sign up
+            Zarejestuj się
+          </Button>{' '}
+          <Button className='navButton' variant='secondary' href='/login'>
+            Zaloguj się
           </Button>{' '}
         </Container>
       </Navbar>
