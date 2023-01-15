@@ -1,10 +1,12 @@
 const express = require("express");
-
-// recordRoutes is an instance of the express router.
-// We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /record.
+const app = express();
 const recordRoutes = express.Router();
 const ObjectId = require('mongodb').ObjectId;
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+const secret = 'secretkey';
+const cors = require('cors');
+app.use(cors());
 
 
 const MongoClient = require('mongodb').MongoClient;
@@ -13,9 +15,25 @@ let db;
 
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
     if (err) throw err;
-    db = client.db("employees");
+    db = client.db("users");
 });
 
+app.use(bodyParser.json());
+
+recordRoutes.route('/api/login').post(function (req, res) {
+    const { login, password } = req.body; 
+    db.collection('records').findOne({ login, password }, (err, user) => {
+        if (err) {
+          res.status(500).send({ message: 'Wystąpił błąd podczas logowania' });
+        } else if (!user) {
+          res.status(404).send({ message: 'Nieprawidłowa nazwa użytkownika lub hasło' });
+        } else {
+          // Creating JWT token
+          const token = jwt.sign({ user }, secret, { expiresIn: '1h' });
+          res.send({ token });
+        }
+      });
+});
 
 // This section will help you get a list of all the records.
 recordRoutes.route("/record").get(function (req, res) {
