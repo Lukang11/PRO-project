@@ -4,17 +4,8 @@ import Content from "./Content/Content";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
 import "./App.css"
-import DayList from "./DayList/DayList"
+// import DayList from "./DayList/DayList"
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <Header></Header>
-//       <DayList></DayList>
-//       <Content/>
-//       <Footer></Footer>
-//     </div>
-//   );
 
 import React from "react";
 
@@ -22,15 +13,6 @@ function App() {
   return (
     <React.Fragment>
     <BrowserRouter>
-      {/* <div className="App">
-        <Header></Header>
-        <Routes>
-          <Route path="/" element={<Content />} />
-          <Route path="/login" element={<Login />}>
-            <Route path="/register" element={<Register />}>
-            </Routes>
-            <Footer></Footer>
-          </div> */}
       <Routes>
         <Route path="/"></Route>
           <Route index element={<Content/>}></Route>
