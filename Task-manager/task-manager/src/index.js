@@ -5,6 +5,8 @@ import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import App from './App';
 
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

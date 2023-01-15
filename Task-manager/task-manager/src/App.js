@@ -1,21 +1,21 @@
-import "./App.css"
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Content from "./Content/Content";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
-<<<<<<< HEAD
+import "./App.css"
 import DayList from "./DayList/DayList"
 
-function App() {
-  return (
-    <div className="App">
-      <Header></Header>
-      <DayList></DayList>
-      <Content/>
-      <Footer></Footer>
-    </div>
-  );
-=======
+// function App() {
+//   return (
+//     <div className="App">
+//       <Header></Header>
+//       <DayList></DayList>
+//       <Content/>
+//       <Footer></Footer>
+//     </div>
+//   );
+
 import React from "react";
 
 function App() {
@@ -40,7 +40,6 @@ function App() {
     </BrowserRouter>
     </React.Fragment>
         );
->>>>>>> c28a9c904024e006a3fe47102e887d25da1c31db
 }
 
 export default App;
