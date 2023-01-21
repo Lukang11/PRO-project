@@ -2,11 +2,11 @@ import './Register.css';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import axios from 'axios';
 
 function Register() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    login: '',
     email: '',
     password: '',
   });
@@ -22,14 +22,16 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Wyślij dane formularza do serwera i zarejestruj użytkownika
-      // ...
-      setSuccess(true);
+        const response = await axios.post('http://localhost:5001/api/register', formData);
+        const { data } = response;
+        if (!response.status === 201) {
+            throw new Error(data.message);
+        }
+        setSuccess(true);
     } catch (error) {
-      // Obsłuż błąd
-      setError(error.message);
+        setError(error.message);
     }
-  };
+};
 
   return (
     <div>
@@ -44,23 +46,13 @@ function Register() {
             <Card.Body>
               <div>
                 <form onSubmit={handleSubmit}>
-                  <label htmlFor='firstName'>Imię:</label>
+                  <label htmlFor='login'>Username:</label>
                   <br></br>
                   <input
                     type='text'
-                    name='firstName'
-                    id='firstName'
-                    value={formData.firstName}
-                    onChange={handleChange}
-                  />
-                  <br></br>
-                  <label htmlFor='lastName'>Nazwisko:</label>
-                  <br></br>
-                  <input
-                    type='text'
-                    name='lastName'
-                    id='lastName'
-                    value={formData.lastName}
+                    name='login'
+                    id='login'
+                    value={formData.logn}
                     onChange={handleChange}
                   />
                   <br></br>

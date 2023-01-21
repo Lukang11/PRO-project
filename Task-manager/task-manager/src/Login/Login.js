@@ -24,7 +24,7 @@ const Login = () => {
       })
       .catch((error) => {
         setError('Nieprawidłowa nazwa użytkownika lub hasło');
-        console.log(error);
+        console.log(error.message);
       });
   };
 

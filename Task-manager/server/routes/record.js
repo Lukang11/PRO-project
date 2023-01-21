@@ -7,6 +7,8 @@ const jwt = require('jsonwebtoken');
 const secret = 'secretkey';
 const cors = require('cors');
 app.use(cors());
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 
 const MongoClient = require('mongodb').MongoClient;
@@ -21,18 +23,75 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 app.use(bodyParser.json());
 
 recordRoutes.route('/api/login').post(function (req, res) {
-    const { login, password } = req.body; 
-    db.collection('records').findOne({ login, password }, (err, user) => {
+    const { login, password } = req.body;
+    db.collection('records').findOne({ login }, (err, user) => {
         if (err) {
-          res.status(500).send({ message: 'Wystąpił błąd podczas logowania' });
+            res.status(500).send({ message: 'Wystąpił błąd podczas logowania' });
         } else if (!user) {
-          res.status(404).send({ message: 'Nieprawidłowa nazwa użytkownika lub hasło' });
+            res.status(404).send({ message: 'Nieprawidłowa nazwa użytkownika lub hasło' });
         } else {
-          // Creating JWT token
-          const token = jwt.sign({ user }, secret, { expiresIn: '1h' });
-          res.send({ token });
+            bcrypt.compare(password, user.password, function (err, isMatch) {
+                if (err) {
+                    res.status(500).send({ message: 'Wystąpił błąd podczas logowania' });
+                } else if (!isMatch) {
+                    res.status(404).send({ message: 'Nieprawidłowa nazwa użytkownika lub hasło' });
+                } else {
+                    // Creating JWT token
+                    const token = jwt.sign({ user }, secret, { expiresIn: '1h' });
+                    res.send({ token });
+                }
+            });
         }
-      });
+    });
+});
+
+recordRoutes.route('/api/register').post(function (req, res) {
+    const { login, email, password } = req.body;
+
+    db.collection('records').findOne({ email }, (err, user) => {
+        if (err) {
+            res.status(500).send({ message: 'Wystąpił błąd podczas rejestracji' });
+        } else if (user) {
+            res.status(409).send({ message: 'Ten adres e-mail jest już zarejestrowany' });
+        } else {
+            bcrypt.hash(password, saltRounds, function(err, hashedPassword) {
+                if (err) {
+                    res.status(500).send({ message: 'Wystąpił błąd podczas rejestracji' });
+                } else {
+                    db.collection('records').insertOne({ login, email, password: hashedPassword }, (err, result) => {
+                        if (err) {
+                            res.status(500).send({ message: 'Wystąpił błąd podczas rejestracji' });
+                        } else {
+                            res.status(201).send({ message: 'Rejestracja zakończona pomyślnie' });
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
+recordRoutes.route('/api/verify').post(function (req, res) {
+    const token = req.headers['x-access-token'];
+    if (!token) {
+        res.status(401).send({ message: 'Brak tokenu' });
+    } else {
+        jwt.verify(token, secret, (err, decoded) => {
+            if (err) {
+                res.status(401).send({ message: 'Nieprawidłowy token' });
+            } else {
+                db.collection('records').findOne({ _id: decoded.user._id }, (err, user) => {
+                    if (err) {
+                        res.status(500).send({ message: 'Wystąpił błąd podczas weryfikacji tokenu' });
+                    } else if (!user) {
+                        res.status(404).send({ message: 'Nie znaleziono użytkownika' });
+                    } else {
+                        res.send({ login: user.login });
+                    }
+                });
+            }
+        });
+    }
 });
 
 recordRoutes.route("/record/:id").get(function (req, res) {
