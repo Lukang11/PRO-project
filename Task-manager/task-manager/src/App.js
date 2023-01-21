@@ -4,15 +4,16 @@ import axios from 'axios';
 import Content from './Content/Content';
 import Login from './Login/Login';
 import Register from './Register/Register';
-import TaskForm from "./TaskForm/TaskForm";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 import './App.css';
 import { Pricing } from './Pricing/Pricing';
 // import DayList from "./DayList/DayList"
-
-
+// import TaskForm from "./TaskForm/TaskForm";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -22,34 +23,29 @@ function App() {
         .then(res => {
           if (res.data.isValid) {
             setIsLoggedIn(true);
+            setUser(res.data.login);
           }
         })
         .catch(err => console.error(err));
     }
   }, []);
-
+  
   return (
     <React.Fragment>
-    {/* <BrowserRouter>
-      <Routes>
-        <Route path="/"></Route>
-          <Route index element={<Content/>}></Route>
-          <Route path="login" element={<Login/>}></Route>
-          <Route path="register" element={<Register/>}></Route>
-          <Route path="task-form" element={<TaskForm/>}></Route>
-      </Routes>
-    </BrowserRouter> */}
-      <BrowserRouter>
-        <Routes>
-          <Route path='/'></Route>
-          <Route index element={<Content />}></Route>
-          <Route path='/pricing' element={<Pricing />}></Route>
-          <Route path='login' element={<Login />}></Route>
-          <Route path='register' element={<Register />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <Header isLoggedIn={isLoggedIn} user={user}/>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/'></Route>
+            <Route index element={<Content />}></Route>
+            <Route path='pricing' element={<Pricing />}></Route>
+            <Route path='login' element={<Login />}></Route>
+            <Route path='register' element={<Register />}></Route>
+          </Routes>
+        </BrowserRouter>
+      <Footer />
     </React.Fragment>
   );
+  
 }
 
 export default App;

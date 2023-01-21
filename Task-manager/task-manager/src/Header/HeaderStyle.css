@@ -28,3 +28,7 @@ body{
         max-width: 100%;
     }
 }
+.welcomeMsg{
+    color: white;
+    margin: 5px;
+}

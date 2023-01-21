@@ -72,27 +72,22 @@ recordRoutes.route('/api/register').post(function (req, res) {
 });
 
 recordRoutes.route('/api/verify').post(function (req, res) {
-    const token = req.headers['x-access-token'];
-    if (!token) {
-        res.status(401).send({ message: 'Brak tokenu' });
-    } else {
-        jwt.verify(token, secret, (err, decoded) => {
-            if (err) {
-                res.status(401).send({ message: 'Nieprawidłowy token' });
-            } else {
-                db.collection('records').findOne({ _id: decoded.user._id }, (err, user) => {
-                    if (err) {
-                        res.status(500).send({ message: 'Wystąpił błąd podczas weryfikacji tokenu' });
-                    } else if (!user) {
-                        res.status(404).send({ message: 'Nie znaleziono użytkownika' });
-                    } else {
-                        res.send({ login: user.login });
-                    }
-                });
-            }
-        });
-    }
+    const { token } = req.body;
+
+
+
+    jwt.verify(token, secret, function (err, decoded) {
+        if (err) {
+            res.status(401).send({ message: 'Nieprawidłowy token' });
+        } else {
+            const decoded = jwt.verify(token, secret);
+            const login = decoded.user.login;
+            res.status(200).send({ isValid: true, login: login });
+        }
+    });
 });
+
+
 
 recordRoutes.route("/record/:id").get(function (req, res) {
     const id = req.params.id;
