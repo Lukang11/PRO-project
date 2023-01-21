@@ -34,13 +34,13 @@ const Login = () => {
         <Card.Body>
           <form onSubmit={handleSubmit}>
             <label>
-              Username:
+              Login:
               <br></br>
               <input type="text" value={login} onChange={(event) => setlogin(event.target.value)} />
             </label>
             <br></br>
             <label>
-              Password:
+              Hasło:
               <br></br>
               <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
             </label>

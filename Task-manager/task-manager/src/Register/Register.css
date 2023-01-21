@@ -9,3 +9,16 @@
 .registerButton{
     margin: 3%;
 }
+.success{
+    text-align: center;
+    margin: 10px;
+}
+.card-body{
+    text-align: center;
+}
+label{
+    text-align: left;
+}
+.error{
+    color: red;
+}

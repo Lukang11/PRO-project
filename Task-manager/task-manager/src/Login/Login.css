@@ -9,3 +9,12 @@
 .loginButton{
     margin: 3%;
 }
+.card-body{
+    text-align: center;
+}
+label{
+    text-align: left;
+}
+.error{
+    color: red;
+}

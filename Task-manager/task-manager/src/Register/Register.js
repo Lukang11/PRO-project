@@ -22,23 +22,36 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-        const response = await axios.post('http://localhost:5001/api/register', formData);
-        const { data } = response;
-        if (!response.status === 201) {
-            throw new Error(data.message);
-        }
-        setSuccess(true);
+      const response = await axios.post('http://localhost:5001/api/register', formData);
+      const { data } = response;
+      if (!response.status === 201) {
+        throw new Error(data.message);
+      }
+      setSuccess(true);
     } catch (error) {
-        setError(error.message);
+      setError(error.message);
     }
-};
+  };
 
   return (
     <div>
       {success ? (
-        <div>
-          <h1>Rejestracja zakończona pomyślnie</h1>
-          <p>Możesz się teraz zalogować.</p>
+        <div className='success'>
+          <Card>
+            <Card.Body>
+              <Card.Title><h1>Rejestracja zakończona pomyślnie</h1></Card.Title>
+              <Card.Text><p>Możesz się teraz zalogować.</p></Card.Text>
+              <div className='registerButtonContainer'>
+                <Button
+                  variant='primary'
+                  type='submit'
+                  className='registerButton'
+                  href='/login'>
+                  Zaloguj się
+                </Button>
+              </div>
+            </Card.Body>
+          </Card>
         </div>
       ) : (
         <div className='register'>
@@ -46,7 +59,7 @@ function Register() {
             <Card.Body>
               <div>
                 <form onSubmit={handleSubmit}>
-                  <label htmlFor='login'>Username:</label>
+                  <label htmlFor='login'>Login:</label>
                   <br></br>
                   <input
                     type='text'
@@ -75,7 +88,7 @@ function Register() {
                     value={formData.password}
                     onChange={handleChange}
                   />
-                  {error && <p>{error}</p>}
+                  {error && <p className='error'>{error}</p>}
                   <div className='registerButtonContainer'>
                     <Button
                       variant='primary'
