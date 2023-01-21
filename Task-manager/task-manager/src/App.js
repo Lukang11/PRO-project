@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Content from './Content/Content';
+import ContentNoAuth from './Content/ContentNoAuth';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import Header from "./Header/Header";
@@ -36,7 +37,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/'></Route>
-            <Route index element={<Content />}></Route>
+            <Route index element={isLoggedIn ? (<Content />) : (<ContentNoAuth />)}></Route>
             <Route path='pricing' element={<Pricing />}></Route>
             <Route path='login' element={<Login />}></Route>
             <Route path='register' element={<Register />}></Route>
