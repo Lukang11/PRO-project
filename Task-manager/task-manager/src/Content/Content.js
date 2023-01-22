@@ -16,7 +16,7 @@ function Content() {
   const [clicked, setClicked] = useState();
   const [add, setAdd] = useState(false);
   const [refresh, setRefresh] = useState();
-  const [id, setId] = useState();
+  const [filteredWorkInfo, setFilteredWorkInfo] = useState([]);
 
   const openAddForm = (add) => {
     setAdd((add) => !add);
@@ -29,9 +29,10 @@ function Content() {
     setClicked((clicked) => !clicked);
   };
   const setDay = (day) => {
-    setWorkInfo((workInfo) => workInfo.filter((item) => item.day !== day));
+    setFilteredWorkInfo(
+      workInfo.filter((item) => item.day === day.target.lastChild.data)
+    );
   };
-
   const removeWorkcard = (id) => {
     // setWorkInfo((workInfo) => workInfo.filter((item) => item._id !== id));
     axios
@@ -70,7 +71,7 @@ function Content() {
 
   return (
     <>
-      <DayList day={setDay} />
+      <DayList day={setDay} refresh={refreshWorkcards} />
       <Button className="button" variant="dark" onClick={openAddForm}>
         <AiOutlinePlus />
       </Button>
@@ -80,7 +81,7 @@ function Content() {
         ) : null}
       </div>
       <div className="card-list">
-        {workInfo.map((value) => (
+        {filteredWorkInfo.map((value) => (
           <div className="card">
             <Workcard
               val={value}
