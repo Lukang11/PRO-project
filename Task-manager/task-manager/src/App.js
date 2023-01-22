@@ -14,7 +14,7 @@ import { Pricing } from './Pricing/Pricing';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -24,16 +24,16 @@ function App() {
         .then(res => {
           if (res.data.isValid) {
             setIsLoggedIn(true);
-            setUser(res.data.login);
+            setUser(res.data.login);  
           }
         })
         .catch(err => console.error(err));
     }
   }, []);
-  
+
   return (
     <React.Fragment>
-      <Header isLoggedIn={isLoggedIn} user={user}/>
+      <Header isLoggedIn={isLoggedIn} user={user.login}/>
         <BrowserRouter>
           <Routes>
             <Route path='/'></Route>

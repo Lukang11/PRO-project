@@ -41,7 +41,7 @@ recordRoutes.route("/api/login").post(function (req, res) {
             .send({ message: "Nieprawidłowa nazwa użytkownika lub hasło" });
         } else {
           // Creating JWT token
-          const token = jwt.sign({ user }, secret, { expiresIn: "1h" });
+          const token = jwt.sign({user: { login, email: user.email, name: user.name, surname: user.surname } }, secret, { expiresIn: "1h" });
           res.send({ token });
         }
       });
@@ -97,8 +97,7 @@ recordRoutes.route("/api/verify").post(function (req, res) {
     if (err) {
       res.status(401).send({ message: "Nieprawidłowy token" });
     } else {
-      const login = decoded.user.login;
-      res.status(200).send({ isValid: true, login: login });
+      res.status(200).send({ isValid: true, login: decoded.user });
     }
   });
 });
