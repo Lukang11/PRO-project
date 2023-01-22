@@ -5,10 +5,10 @@ import Card from "react-bootstrap/Card";
 import axios from "axios";
 
 export default function EditWorkcard(props) {
-  const [name, setName] = useState();
-  const [taskStart, setTaskStart] = useState();
-  const [taskEnd, setTaskEnd] = useState();
-  const [taskType, setTaskType] = useState();
+  const [name, setName] = useState(props.val.name);
+  const [taskStart, setTaskStart] = useState(props.val.task_start);
+  const [taskEnd, setTaskEnd] = useState(props.val.task_end);
+  const [taskType, setTaskType] = useState(props.val.task_type);
   const url = `http://localhost:5001/api/workinfo/edit/${props.id}`;
   function onSubmit(e) {
     e.preventDefault();
@@ -23,7 +23,7 @@ export default function EditWorkcard(props) {
     props.refresh();
   }
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card>
       <Card.Body>
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">

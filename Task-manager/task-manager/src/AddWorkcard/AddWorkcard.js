@@ -9,21 +9,35 @@ export default function AddWorkcard(props) {
   const [taskStart, setTaskStart] = useState();
   const [taskEnd, setTaskEnd] = useState();
   const [taskType, setTaskType] = useState();
+  const [selectedOption, setSelectedOption] = useState("Monday");
+
   const url = "http://localhost:5001/api/workinfo/add";
   function onSubmit(e) {
     e.preventDefault();
     axios
-      .put(url, { name, taskStart, taskEnd, taskType })
+      .put(url, { name, taskStart, taskEnd, taskType, selectedOption })
       .then((response) => {
         alert(response.status);
+        props.refresh();
       })
       .catch((err) => {
         alert("Coś poszło nie tak" + err);
       });
-    props.refresh();
   }
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const options = [
+    { value: "Monday", label: "Monday" },
+    { value: "Tuesday", label: "Tuesday" },
+    { value: "Wednesday", label: "Wednesday" },
+    { value: "Thursday", label: "Thursday" },
+    { value: "Friday", label: "Friday" },
+  ];
   return (
-    <Card style={{ width: "40%" }}>
+    <Card>
       <Card.Body>
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -60,6 +74,16 @@ export default function AddWorkcard(props) {
               onChange={(e) => setTaskType(e.target.value)}
               required
             />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label> Dzień </Form.Label>
+            <select options={selectedOption} onChange={handleChange}>
+              {options.map((option) => (
+                <option value={option.value} defaultValue={options.at(0).value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit

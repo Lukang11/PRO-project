@@ -13,13 +13,22 @@ function Workcard(props) {
     <div>
       <Card.Body>
         <Card.Title>{props.val.name}</Card.Title>
-        <Card.Subtitle>{props.val.task_start}</Card.Subtitle>
-        <Card.Subtitle>{props.val.task_end}</Card.Subtitle>
+        <Card.Subtitle>
+          {props.val.task_start}
+          {"-"}
+          {props.val.task_end}
+        </Card.Subtitle>
+        <Card.Subtitle>{props.val.day}</Card.Subtitle>
         <Card.Text>{props.val.task_type}</Card.Text>
-        <Button variant="primary" onClick={props.isdone}>
+        <Button
+          variant="primary"
+          className="honeyButton"
+          onClick={props.isdone}
+        >
           {props.valDone ? <BsCheck2 /> : "Zrobione"}
         </Button>
         <Button
+          className="honeyButton"
           variant="primary"
           onClick={() => {
             props.remove(props.val._id);
@@ -28,6 +37,7 @@ function Workcard(props) {
           <TiMinus></TiMinus>
         </Button>
         <Button
+          className="honeyButton"
           variant="primary"
           onClick={() => {
             setClicked((clicked) => !clicked);
@@ -36,16 +46,16 @@ function Workcard(props) {
         >
           <RxGear></RxGear>
         </Button>
+        <div>
+          {clicked && props.val ? (
+            <EditWorkcard
+              id={props.val._id}
+              val={props.val}
+              refresh={props.refresh}
+            />
+          ) : null}
+        </div>
       </Card.Body>
-      <div>
-        {clicked && props.val ? (
-          <EditWorkcard
-            id={props.val._id}
-            val={props.val}
-            refresh={props.refresh}
-          />
-        ) : null}
-      </div>
     </div>
   );
 }
