@@ -67,6 +67,7 @@ function Register() {
                     id='login'
                     value={formData.logn}
                     onChange={handleChange}
+                    required
                   />
                   <br></br>
                   <label htmlFor='email'>E-mail:</label>
@@ -77,6 +78,7 @@ function Register() {
                     id='email'
                     value={formData.email}
                     onChange={handleChange}
+                    required
                   />
                   <br></br>
                   <label htmlFor='password'>Hasło:</label>
@@ -87,6 +89,7 @@ function Register() {
                     id='password'
                     value={formData.password}
                     onChange={handleChange}
+                    required
                   />
                   {error && <p className='error'>{error}</p>}
                   <div className='registerButtonContainer'>
