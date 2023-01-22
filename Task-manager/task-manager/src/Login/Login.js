@@ -36,13 +36,13 @@ const Login = () => {
             <label>
               Login:
               <br></br>
-              <input type="text" value={login} onChange={(event) => setlogin(event.target.value)} />
+              <input type="text" value={login} onChange={(event) => setlogin(event.target.value)} required/>
             </label>
             <br></br>
             <label>
               Hasło:
               <br></br>
-              <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+              <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} required />
             </label>
             {error && <p className="error">{error}</p>}
             <div className="loginButtonContainer">
