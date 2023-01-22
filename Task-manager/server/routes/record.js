@@ -160,15 +160,19 @@ recordRoutes.route("/api/workinfo").get(function (req, res) {
       res.send(result);
     });
 });
-recordRoutes.route("/api/workinfo/add").get(function (req, res) {
+recordRoutes.route("/api/workinfo/add").put(function (req, res) {
+  const { name, taskStart, taskEnd, taskType } = req.body;
   const data = db
     .collection("workinfo")
-    .find({})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      console.log(result);
+    .insertOne({
+      name,
+      task_start: taskStart,
+      task_end: taskEnd,
+      task_type: taskType,
+    })
+    .then((response) => {
+      res.send(response);
     });
-  res.send(data);
 });
 
 module.exports = recordRoutes;
