@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
+import validator from 'validator';
 
 function Register() {
   const [formData, setFormData] = useState({
     login: '',
     email: '',
+    name: '',
+    surname: '',
     password: '',
   });
 
@@ -21,6 +24,18 @@ function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const passwordError = checkPasswordStrength(formData.password);
+    if (passwordError) {
+      setError(passwordError);
+      return;
+    }
+
+    const emailError = validator.isEmail(formData.email) ? '' : 'Nieprawidłowy adres email.';
+    if (emailError) {
+      setError(emailError);
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:5001/api/register', formData);
       const { data } = response;
@@ -29,9 +44,28 @@ function Register() {
       }
       setSuccess(true);
     } catch (error) {
-      setError(error.message);
+      setError(error.response.data.message);
     }
   };
+
+  const checkPasswordStrength = password => {
+    if (password.length < 8) {
+      return 'Hasło musi mieć co najmniej 8 znaków.';
+    }
+    if (!/\d/.test(password)) {
+      return 'Hasło musi zawierać co najmniej jedną cyfrę.';
+    }
+    if (!/[a-z]/.test(password)) {
+      return 'Hasło musi zawierać co najmniej jedną małą literę.';
+    }
+    if (!/[A-Z]/.test(password)) {
+      return 'Hasło musi zawierać co najmniej jedną dużą literę.';
+    }
+    if (!/[!@#\$%\^&\*]/.test(password)) {
+      return 'Hasło musi zawierać co najmniej jeden znak specjalny.';
+    }
+    return '';
+  }
 
   return (
     <div>
@@ -65,7 +99,7 @@ function Register() {
                     type='text'
                     name='login'
                     id='login'
-                    value={formData.logn}
+                    value={formData.login}
                     onChange={handleChange}
                     required
                   />
@@ -77,6 +111,28 @@ function Register() {
                     name='email'
                     id='email'
                     value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+                  <br></br>
+                  <label htmlFor='name'>Imie:</label>
+                  <br></br>
+                  <input
+                    type='text'
+                    name='name'
+                    id='name'
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                  <br></br>
+                  <label htmlFor='surname'>Nazwisko:</label>
+                  <br></br>
+                  <input
+                    type='text'
+                    name='surname'
+                    id='surname'
+                    value={formData.surname}
                     onChange={handleChange}
                     required
                   />

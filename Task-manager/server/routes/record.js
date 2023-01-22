@@ -50,36 +50,40 @@ recordRoutes.route("/api/login").post(function (req, res) {
 });
 
 recordRoutes.route("/api/register").post(function (req, res) {
-  const { login, email, password } = req.body;
-
-  db.collection("records").findOne({ email }, (err, user) => {
+  const { login, email, name, surname, password } = req.body;
+  
+  db.collection("records").findOne({ login }, (err, user) => {
     if (err) {
       res.status(500).send({ message: "Wystąpił błąd podczas rejestracji" });
     } else if (user) {
-      res
-        .status(409)
-        .send({ message: "Ten adres e-mail jest już zarejestrowany" });
+      res.status(409).send({ message: "Ta nazwa użytkownika jest już zarejestrowana" });
     } else {
-      bcrypt.hash(password, saltRounds, function (err, hashedPassword) {
+      db.collection("records").findOne({ email }, (err, user) => {
         if (err) {
-          res
-            .status(500)
-            .send({ message: "Wystąpił błąd podczas rejestracji" });
+          res.status(500).send({ message: "Wystąpił błąd podczas rejestracji" });
+        } else if (user) {
+          res.status(409).send({ message: "Ten adres email jest już zarejestrowany" });
         } else {
-          db.collection("records").insertOne(
-            { login, email, password: hashedPassword },
-            (err, result) => {
-              if (err) {
-                res
-                  .status(500)
-                  .send({ message: "Wystąpił błąd podczas rejestracji" });
-              } else {
-                res
-                  .status(201)
-                  .send({ message: "Rejestracja zakończona pomyślnie" });
-              }
+          bcrypt.hash(password, saltRounds, function (err, hashedPassword) {
+            if (err) {
+              res.status(500).send({ message: "Wystąpił błąd podczas rejestracji" });
+            } else {
+              db.collection("records").insertOne(
+                { login, email, name, surname, password: hashedPassword },
+                (err, result) => {
+                  if (err) {
+                    res
+                      .status(500)
+                      .send({ message: "Wystąpił błąd podczas rejestracji" });
+                  } else {
+                    res
+                      .status(201)
+                      .send({ message: "Rejestracja zakończona pomyślnie" });
+                  }
+                }
+              );
             }
-          );
+          });
         }
       });
     }
