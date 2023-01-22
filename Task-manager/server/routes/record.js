@@ -207,4 +207,24 @@ recordRoutes.route("/api/workinfo/del/:id").delete(function (req, res) {
   );
 });
 
+recordRoutes.route("/api/workinfo/edit/:id").put(function (req, res) {
+  const id = req.params.id;
+  const { name, taskStart, taskEnd, taskType } = req.body;
+  db.collection("workinfo").updateOne(
+    { _id: ObjectId(id) },
+    {
+      $set: {
+        name: name,
+        task_start: taskStart,
+        task_end: taskEnd,
+        task_type: taskType,
+      },
+    },
+    function (err, result) {
+      if (err) throw err;
+      res.send(result);
+    }
+  );
+});
+
 module.exports = recordRoutes;
