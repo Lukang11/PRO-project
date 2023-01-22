@@ -5,10 +5,11 @@ function Logout() {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
+        window.location.reload();
     }
 
     return (
-        <Button className='navButton' variant='secondary' onClick={handleLogout()} href='/'>
+        <Button className='navButton' variant='secondary' onClick={handleLogout}>
             Wyloguj się
         </Button>
 

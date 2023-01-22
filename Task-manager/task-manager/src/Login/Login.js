@@ -23,8 +23,7 @@ const Login = () => {
         window.location = '/';
       })
       .catch((error) => {
-        setError('Nieprawidłowa nazwa użytkownika lub hasło');
-        console.log(error.message);
+        setError(error.response.data.message);
       });
   };
 
