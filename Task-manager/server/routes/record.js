@@ -182,7 +182,7 @@ recordRoutes.route("/api/workinfo").get(function (req, res) {
     });
 });
 recordRoutes.route("/api/workinfo/add").put(function (req, res) {
-  const { name, taskStart, taskEnd, taskType } = req.body;
+  const { name, taskStart, taskEnd, taskType, selectedOption } = req.body;
   const data = db
     .collection("workinfo")
     .insertOne({
@@ -190,6 +190,7 @@ recordRoutes.route("/api/workinfo/add").put(function (req, res) {
       task_start: taskStart,
       task_end: taskEnd,
       task_type: taskType,
+      day: selectedOption,
     })
     .then((response) => {
       res.send(response);
