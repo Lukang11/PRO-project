@@ -14,7 +14,7 @@ h1 {
 .pricing-container {
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 10px auto;
   max-width: 1200px;
 }
 
