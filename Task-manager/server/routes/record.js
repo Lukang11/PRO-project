@@ -93,7 +93,6 @@ recordRoutes.route("/api/verify").post(function (req, res) {
     if (err) {
       res.status(401).send({ message: "Nieprawidłowy token" });
     } else {
-      const decoded = jwt.verify(token, secret);
       const login = decoded.user.login;
       res.status(200).send({ isValid: true, login: login });
     }
