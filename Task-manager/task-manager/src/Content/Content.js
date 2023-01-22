@@ -27,7 +27,15 @@ function Content() {
   };
 
   const removeWorkcard = (id) => {
-    setWorkInfo((workInfo) => workInfo.filter((item) => item._id !== id));
+    // setWorkInfo((workInfo) => workInfo.filter((item) => item._id !== id));
+    axios
+      .delete(`http://localhost:5001/api/workinfo/del/${id}`)
+      .then((response) => {
+        refreshWorkcards(refresh);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const refreshWorkcards = (refresh) => {
     setRefresh((refresh) => !refresh);
