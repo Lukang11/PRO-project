@@ -4,12 +4,12 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 
-export default function AddWorkcard(props) {
+export default function EditWorkcard(props) {
   const [name, setName] = useState();
   const [taskStart, setTaskStart] = useState();
   const [taskEnd, setTaskEnd] = useState();
   const [taskType, setTaskType] = useState();
-  const url = "http://localhost:5001/api/workinfo/add";
+  const url = `http://localhost:5001/api/workinfo/edit/${props.id}`;
   function onSubmit(e) {
     e.preventDefault();
     axios
@@ -23,14 +23,14 @@ export default function AddWorkcard(props) {
     props.refresh();
   }
   return (
-    <Card style={{ width: "40%" }}>
+    <Card style={{ width: "18rem" }}>
       <Card.Body>
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Imię i nazwisko pracownika</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Wprowadz imię i nazwisko"
+              defaultValue={`${props.val.name}`}
               onChange={(e) => setName(e.target.value)}
               required
             />
@@ -40,7 +40,7 @@ export default function AddWorkcard(props) {
             <Form.Label>Start zadania</Form.Label>
             <Form.Control
               type="time"
-              placeholder="Przewidywany czas zadania"
+              defaultValue={`${props.val.task_start}`}
               onChange={(e) => setTaskStart(e.target.value)}
             />
           </Form.Group>
@@ -48,7 +48,7 @@ export default function AddWorkcard(props) {
             <Form.Label>Koniec zadania</Form.Label>
             <Form.Control
               type="time"
-              placeholder="Przewidywany czas zadania"
+              defaultValue={`${props.val.task_end}`}
               onChange={(e) => setTaskEnd(e.target.value)}
             />
           </Form.Group>
@@ -56,7 +56,7 @@ export default function AddWorkcard(props) {
             <Form.Label>Typ zadania</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Rodzaj zadania"
+              defaultValue={`${props.val.task_type}`}
               onChange={(e) => setTaskType(e.target.value)}
               required
             />

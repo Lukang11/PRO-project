@@ -3,8 +3,12 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { BsCheck2 } from "react-icons/bs";
 import { TiMinus } from "react-icons/ti";
+import { RxGear } from "react-icons/rx";
+import EditWorkcard from "../EditWorkcard/EditWorkcard";
 
 function Workcard(props) {
+  const [clicked, setClicked] = useState(false);
+  const [data, setData] = useState();
   return (
     <div>
       <Card.Body>
@@ -23,7 +27,25 @@ function Workcard(props) {
         >
           <TiMinus></TiMinus>
         </Button>
+        <Button
+          variant="primary"
+          onClick={() => {
+            setClicked((clicked) => !clicked);
+            // props.edit(props.val._id);
+          }}
+        >
+          <RxGear></RxGear>
+        </Button>
       </Card.Body>
+      <div>
+        {clicked && props.val ? (
+          <EditWorkcard
+            id={props.val._id}
+            val={props.val}
+            refresh={props.refresh}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }

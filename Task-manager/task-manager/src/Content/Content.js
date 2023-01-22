@@ -14,6 +14,7 @@ function Content() {
   const [clicked, setClicked] = useState();
   const [add, setAdd] = useState(false);
   const [refresh, setRefresh] = useState();
+  const [id, setId] = useState();
 
   const openAddForm = (add) => {
     setAdd((add) => !add);
@@ -40,6 +41,8 @@ function Content() {
   const refreshWorkcards = (refresh) => {
     setRefresh((refresh) => !refresh);
   };
+
+  const editWorkcard = (ele_id) => setId((ele_id) => ele_id);
 
   useEffect(() => {
     axios
@@ -78,6 +81,7 @@ function Content() {
             isdone={isDone}
             valDone={done}
             remove={removeWorkcard}
+            refresh={refreshWorkcards}
           ></Workcard>
         </div>
       ))}
