@@ -1,15 +1,15 @@
-/* 
 .NoAuthContentContainer {
   margin: 10px;
   background-color: white;
   border-radius: 15px;
   padding: 10px;
   box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
-} */
+}
 
 .button {
   float: right;
   display: block;
+  margin: 5px;
 }
 
 @media (max-width: 600px) {
@@ -21,10 +21,12 @@
 .card-list {
   display: flex;
   flex-wrap: wrap;
+  z-index: 1;
 }
 .addForm {
-  width: 20em;
   float: right;
   display: block;
   min-width: 20em;
+  z-index: 2;
+  position: relative;
 }
