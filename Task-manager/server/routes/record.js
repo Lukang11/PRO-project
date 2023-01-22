@@ -41,7 +41,18 @@ recordRoutes.route("/api/login").post(function (req, res) {
             .send({ message: "Nieprawidłowa nazwa użytkownika lub hasło" });
         } else {
           // Creating JWT token
-          const token = jwt.sign({user: { login, email: user.email, name: user.name, surname: user.surname } }, secret, { expiresIn: "1h" });
+          const token = jwt.sign(
+            {
+              user: {
+                login,
+                email: user.email,
+                name: user.name,
+                surname: user.surname,
+              },
+            },
+            secret,
+            { expiresIn: "1h" }
+          );
           res.send({ token });
         }
       });
@@ -51,22 +62,30 @@ recordRoutes.route("/api/login").post(function (req, res) {
 
 recordRoutes.route("/api/register").post(function (req, res) {
   const { login, email, name, surname, password } = req.body;
-  
+
   db.collection("records").findOne({ login }, (err, user) => {
     if (err) {
       res.status(500).send({ message: "Wystąpił błąd podczas rejestracji" });
     } else if (user) {
-      res.status(409).send({ message: "Ta nazwa użytkownika jest już zarejestrowana" });
+      res
+        .status(409)
+        .send({ message: "Ta nazwa użytkownika jest już zarejestrowana" });
     } else {
       db.collection("records").findOne({ email }, (err, user) => {
         if (err) {
-          res.status(500).send({ message: "Wystąpił błąd podczas rejestracji" });
+          res
+            .status(500)
+            .send({ message: "Wystąpił błąd podczas rejestracji" });
         } else if (user) {
-          res.status(409).send({ message: "Ten adres email jest już zarejestrowany" });
+          res
+            .status(409)
+            .send({ message: "Ten adres email jest już zarejestrowany" });
         } else {
           bcrypt.hash(password, saltRounds, function (err, hashedPassword) {
             if (err) {
-              res.status(500).send({ message: "Wystąpił błąd podczas rejestracji" });
+              res
+                .status(500)
+                .send({ message: "Wystąpił błąd podczas rejestracji" });
             } else {
               db.collection("records").insertOne(
                 { login, email, name, surname, password: hashedPassword },
@@ -175,6 +194,17 @@ recordRoutes.route("/api/workinfo/add").put(function (req, res) {
     .then((response) => {
       res.send(response);
     });
+});
+
+recordRoutes.route("/api/workinfo/del/:id").delete(function (req, res) {
+  const id = req.params.id;
+  db.collection("workinfo").deleteOne(
+    { _id: ObjectId(id) },
+    function (err, result) {
+      if (err) throw err;
+      res.send(result);
+    }
+  );
 });
 
 module.exports = recordRoutes;
