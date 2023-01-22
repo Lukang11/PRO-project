@@ -16,11 +16,18 @@ function Register() {
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState(0);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((formData) => ({ ...formData, [name]: value }));
   };
+
+const passwordChange = (event) => {
+  const { name, value } = event.target;
+    setFormData((formData) => ({ ...formData, [name]: value }));
+    setPasswordStrength(calculatePasswordStrength(value));
+}
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -66,6 +73,28 @@ function Register() {
     }
     return '';
   }
+
+  const calculatePasswordStrength = (password) => {
+    let strength = 0;
+
+    if (password.length >= 8) {
+        strength += 20;
+    }
+    if (password.match(/\d+/)) {
+        strength += 20;
+    }
+    if (password.match(/[a-z]+/)) {
+        strength += 20;
+    }
+    if (password.match(/[A-Z]+/)) {
+        strength += 20;
+    }
+    if (password.match(/[!@#\$%\^&\*]/)){
+        strength += 20;
+    }
+
+    return strength;
+}
 
   return (
     <div>
@@ -144,9 +173,15 @@ function Register() {
                     name='password'
                     id='password'
                     value={formData.password}
-                    onChange={handleChange}
+                    onChange={passwordChange}
                     required
                   />
+                    <div className="password-strength-bar">
+                      <div
+                        className="password-strength-bar-fill"
+                        style={{ width: `${passwordStrength}%` }}
+                      ></div>
+                    </div>         
                   {error && <p className='error'>{error}</p>}
                   <div className='registerButtonContainer'>
                     <Button
