@@ -1,12 +1,16 @@
-import "./DayList.css"
+import "./DayList.css";
 
-function DayList(){
-    const days = ['Monday','Tuesday','Wednesday','Thursday','Friday ']
+function DayList() {
+  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday "];
 
-    return <>
-        <ul>
-            {days.map((day)=><li>{day}</li>)}
-        </ul>
+  return (
+    <>
+      <ul>
+        {days.map((day, index) => (
+          <li key={index}>{day}</li>
+        ))}
+      </ul>
     </>
+  );
 }
 export default DayList;

@@ -1,104 +1,103 @@
 .hexagon-list {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 .hexagon-list:nth-child(even) {
-    padding-left: 70px;
+  padding-left: 70px;
 }
 
 .hexagon {
-    margin-top: 100px;
-    width: 300px;
-    height: 150px;
-    background-color: #ffc649;
-    position: relative;
-    float: left;
-    margin-left: 10px;
-    margin-right: 10px;
-    line-height: 35px;
-    color: black;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.5s ease;
-
+  margin-top: 100px;
+  width: 300px;
+  height: 150px;
+  background-color: #ffc649;
+  position: relative;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  line-height: 35px;
+  color: black;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
 }
 
 .hexagon:hover {
-    background-color: #ffc649;
+  background-color: #ffc649;
 }
 
 .hexagon:before,
 .hexagon:after {
-    position: absolute;
-    content: "";
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    left: 0;
-    right: 0;
+  position: absolute;
+  content: "";
+  border-left: 150px solid transparent;
+  border-right: 150px solid transparent;
+  left: 0;
+  right: 0;
 }
 
 .hexagon:before {
-    margin-bottom: -1px;
-    transition: border-bottom-color 0.5s ease;
-    bottom: 100%;
-    border-bottom: 75px solid #ffc649;
+  margin-bottom: -1px;
+  transition: border-bottom-color 0.5s ease;
+  bottom: 100%;
+  border-bottom: 75px solid #ffc649;
 }
 
 .hexagon:after {
-    margin-top: -1px;
-    transition: border-top-color 0.5s ease;
-    top: 100%;
-    border-top: 75px solid #ffc649;
+  margin-top: -1px;
+  transition: border-top-color 0.5s ease;
+  top: 100%;
+  border-top: 75px solid #ffc649;
 }
 
 .hexagon-inner {
-    width: 100px;
-    height: 50px;
-    background-color: white;
-    position: relative;
-    float: left;
-    margin-right: 10px;
-    line-height: 50px;
-    color: rgb(23, 180, 159);
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.5s ease;
-    transform: scale(0.95);
-    z-index: 100;
+  width: 100px;
+  height: 50px;
+  background-color: white;
+  position: relative;
+  float: left;
+  margin-right: 10px;
+  line-height: 50px;
+  color: rgb(23, 180, 159);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  transform: scale(0.95);
+  z-index: 100;
 }
 
 .hexagon-inner:hover {
-    background-color: white;
+  background-color: white;
 }
 
 .hexagon-inner:before,
 .hexagon-inner:after {
-    position: absolute;
-    content: "";
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    left: 0;
-    right: 0;
+  position: absolute;
+  content: "";
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  left: 0;
+  right: 0;
 }
 
 .hexagon-inner:before {
-    margin-bottom: -1px;
-    transition: border-bottom-color 0.5s ease;
-    bottom: 100%;
-    border-bottom: 25px solid white;
+  margin-bottom: -1px;
+  transition: border-bottom-color 0.5s ease;
+  bottom: 100%;
+  border-bottom: 25px solid white;
 }
 
 .hexagon-inner:after {
-    margin-top: -1px;
-    transition: border-top-color 0.5s ease;
-    top: 100%;
-    border-top: 25px solid white;
+  margin-top: -1px;
+  transition: border-top-color 0.5s ease;
+  top: 100%;
+  border-top: 25px solid white;
 }
 
-.NoAuthContentContainer{
-    margin: 10px;
-    background-color: white;
-    border-radius: 15px;
-    padding: 10px;
-    box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+.NoAuthContentContainer {
+  margin: 10px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
 }
