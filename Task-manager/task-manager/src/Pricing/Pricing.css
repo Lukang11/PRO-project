@@ -56,6 +56,10 @@ h1 {
   color: #333333;
 }
 
+.pricing-li {
+  width: 100%;
+}
+
 .pricing-card button {
   background: #c9a700;
   color: #ffffff;
